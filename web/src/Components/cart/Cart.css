@@ -1,0 +1,131 @@
+.payment-form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2px !important;
+  border: none !important;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.summary {
+  margin-top: 20px;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.CardField-number.is-hidden {
+  opacity: 0 !important;
+}
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+.processing-message {
+  margin-top: 10px;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.cart-title {
+  font-size: calc(0.4em + 0.4vw);
+  max-width: 200px;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 800px;
+  max-height: 80%;
+  overflow-y: auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 1rem;
+}
+/* Ensure the Stripe iframe spans the full width of its container */
+.StripeElement {
+  width: 100% !important;
+}
+
+/* Targeting the internal iframe of the Stripe element */
+.__PrivateStripeElement {
+  width: 100% !important;
+  min-width: 100% !important;
+}
+
+/* Ensure the iframe is properly aligned */
+.__PrivateStripeElement iframe {
+  width: 100% !important;
+  min-width: 100% !important;
+  opacity: 1 !important;
+  transition: opacity 0.4s ease-in-out !important;
+}
+
+/* Additional styling to ensure smooth transition of opacity */
+.__PrivateStripeElement--complete iframe,
+.__PrivateStripeElement--focus iframe,
+.__PrivateStripeElement--empty iframe {
+  opacity: 1 !important;
+}
+
+.__PrivateStripeElement--invalid iframe {
+  opacity: 0.5 !important;
+}
+.is-hidden input[name=cardnumber] {
+  opacity: 0 !important;
+}
+.is-hidden .CardField-number-fakeNumber {
+  opacity: 1 !important;
+}
+/* Container adjustments */
+.stripe-element-container {
+  position: relative;
+  padding: 0 !important;
+  border: none !important;
+  display: block !important;
+  background: transparent !important;
+  height: auto !important;
+  width: 100% !important;
+  overflow: hidden !important;
+}
+.ElementsApp, .ElementsApp .InputElement {
+  font-size: 1em !important;
+  color: #32325d;
+}

@@ -1,0 +1,32 @@
+/* Add these styles to your CSS file */
+
+@keyframes fadeInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes fadeOutRight {
+    from {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+  }
+  
+  .fade-in-left {
+    animation: fadeInLeft 0.5s ease-out forwards;
+  }
+  
+  .fade-out-right {
+    animation: fadeOutRight 0.5s ease-out forwards;
+  }
+  

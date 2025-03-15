@@ -1,0 +1,279 @@
+.App {
+  text-align: center;
+}
+.bg-header {
+  background-image: url('https://www.hz-bay.com/header.jpg');
+  background-size: cover; /* Optional: cover the entire element */
+  background-position: center; /* Optional: center the image */
+  background-repeat: no-repeat; /* Optional: prevent the image from repeating */
+  height: 30em;
+  padding-top:8em !important;
+}
+/* For WebKit-based browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+  height: 8px; /* Height of the scrollbar (horizontal) */
+}
+
+::-webkit-scrollbar-track {
+  background: #2c2c2c; /* Dark metallic background of the scrollbar track */
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px grey; /* Inner shadow for a metallic effect */
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #c0c0c0, #8b8b8b); /* Metallic gradient for the scrollbar thumb */
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px #000000; /* Inner shadow for depth */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #dcdcdc, #a0a0a0); /* Lighter metallic gradient on hover */
+}
+
+
+
+/* For Edge, IE, and other browsers using -ms- prefix */
+body {
+
+}
+.carousel-indicators {
+  list-style-type: none;  /* Removes the default number markers */
+  padding-left: 0;        /* Removes any left padding/margin typically added to lists */
+}
+
+.carousel-indicators li {
+  list-style: none;        /* Ensures no list-style is applied */
+}
+/* For the body scrollbar */
+body::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #2c2c2c;
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px grey;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #c0c0c0, #8b8b8b);
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px #000000;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #dcdcdc, #a0a0a0);
+}
+
+.icon-hover:hover {
+  border-color: #3b71ca !important;
+  background-color: white !important;
+}
+/* src/App.css */
+body {
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.display-4 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.card {
+  cursor: pointer;
+}
+.card-title {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.card-text {
+  font-family: 'Roboto', sans-serif;
+}
+.icon-hover:hover i {
+  color: #3b71ca !important;
+}
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+.category-selector {
+  display: flex;
+  align-items: flex-end;
+}
+
+.category-btn {
+  position: relative;
+  z-index: 1;
+}
+
+.spinner-overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000; /* Ensure spinner is above other content */
+}
+
+.spinner-container {
+  display: inline-block; /* Center spinner horizontally */
+}
+.btn:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+.category-selector {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.category-selector button {
+  position: relative;
+  z-index: 1;
+  margin: 5px;
+  flex: 1 1 auto;
+  max-width: 150px; /* You can adjust this value to fit your design */
+}
+
+.category-slider {
+  position: absolute;
+  bottom: 0;
+  height: 4px;
+  background-color: #ffffff;
+  transition: left 0.3s ease, width 0.3s ease;
+  z-index: 0;
+}
+.nav-item {
+  cursor: pointer;
+}
+h5 {
+  color: black;
+  font-size: 12px;
+}
+
+.card-body {
+  display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.btn-outline-primary {
+ color: #ffcdba;
+}
+.card-text {
+  color: black;
+}
+.mb-2, .my-2 {
+  margin-bottom: .5rem !important;
+  padding: 1em;
+}
+
+
+/* --SEARCH RESULTS --*/
+
+.product-image img {
+  width: 100%;
+  height: auto;
+}
+
+.search-results .row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.search-result-item {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 300px;
+  margin: 10px;
+}
+
+.search-result-item h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.search-result-item p {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.list-group-item.active {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+.title-link {
+  text-decoration: none;
+  color: rgb(15, 15, 15);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+@keyframes fadeInForward {
+  0% {
+      opacity: 0;
+      transform: translateY(50px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.fade-in-forward {
+  animation: fadeInForward 1s ease-out forwards;
+}
+
+.fade-in-target {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+/* Optional: Add a class to ensure already animated elements retain visibility */
+.animated {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Keyframes for the jump animation */
+@keyframes jumpToRight {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px); /* Adjust the distance of the jump */
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Apply animation class */
+.animate-jump {
+  animation: jumpToRight 0.5s ease; /* Adjust duration and easing as needed */
+}
