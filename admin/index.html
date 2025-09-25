@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .custom-control-input:checked ~ .custom-control-label::before {
+            background-color: #28a745; /* Green for "In Stock" */
+            border-color: #28a745;
+        }
+        .custom-control-input:not(:checked) ~ .custom-control-label::before {
+            background-color: #dc3545; /* Red for "Out of Stock" */
+            border-color: #dc3545;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Admin Page</h1>
+
+        <!-- Form to Add/Edit a Product -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2 class="h5" id="formTitle">Add New Product</h2>
+            </div>
+            <div class="card-body">
+                <form id="productForm" action="/admin/add-product?passCode=tempaccuratedarkbow99231" method="POST" enctype="multipart/form-data">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="id">Product ID</label>
+                            <input type="text" required=false class="form-control" id="id" name="id" placeholder="Product ID">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="title">Product Title</label>
+                            <input type="text" class="form-control" id="title" name="title" placeholder="Product Title" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="shortTitle">Short Title</label>
+                            <input type="text" class="form-control" id="shortTitle" name="shortTitle" placeholder="Short Title" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="price">Price</label>
+                            <input type="text" class="form-control" id="price" name="price" placeholder="Price" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="category">Category</label>
+                            <input type="text" class="form-control" id="category" name="category" placeholder="Category" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="category">Tags</label>
+                            <input type="text" class="form-control" id="tags" name="tags" placeholder="Tags" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="category">options</label>
+                            <input type="text" required=false class="form-control" id="options" name="options" placeholder="options">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="description">Product Description (HTML)</label>
+                            <textarea class="form-control" id="description" name="description" rows="5" placeholder="Enter product description here..." required></textarea>
+                            <div class="mt-2">
+                                <button type="button" class="btn btn-info" id="previewButton">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="descriptionPreview" class="mt-4 p-3 border rounded" style="display: none;">
+                        <h4>Preview:</h4>
+                        <div id="previewContent"></div>
+                    </div>
+                    <div class="form-row mt-3">
+                        <div class="form-group col-md-12">
+                            <label for="stockStatus">Stock Status</label>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="stockStatus" name="inStock">
+                                <label class="custom-control-label" for="stockStatus"></label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="sourceUrl">Delivery Days</label>
+                            <input type="text" class="form-control" id="deliveryDays" name="deliveryDays" placeholder="Days" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="sourceUrl">Source Product URL</label>
+                            <input type="text" class="form-control" id="sourceUrl" name="sourceUrl" placeholder="Source URL" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="sourcePrice">Source Product Price</label>
+                            <input type="text" class="form-control" id="sourcePrice" name="sourcePrice" placeholder="Source Price" required>
+                        </div>
+                    </div>
+                    <!-- File input for image uploads -->
+                    <div class="form-group">
+                        <label for="productImages">Upload Images</label>
+                        <input type="file" class="form-control-file" id="productImages" name="file" multiple>
+                    </div>
+                    <input type="hidden" id="formAction" value="add">
+                    <button type="submit" class="btn btn-primary" id="formButton">Add Product</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- List of Products with Edit/Delete Options -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="h5">Products by Category</h2>
+            </div>
+            <div class="card-body">
+                <div id="categories">
+                    <!-- Categories will be dynamically generated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Function to encode JSON data to avoid special character issues
+        function encodeForAttribute(str) {
+            return str.replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        // JavaScript to dynamically generate the product list by categories and handle edit/delete actions
+        async function fetchProducts() {
+            const response = await fetch('/products.json');
+            const products = await response.json();
+
+            const categoriesDiv = document.getElementById('categories');
+            categoriesDiv.innerHTML = '';
+
+            for (const category in products) {
+                const categoryCard = document.createElement('div');
+                categoryCard.className = 'card mb-4';
+                categoryCard.innerHTML = `
+                    <div class="card-header">
+                        <h3 class="h6">${category}</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group" id="${category}-list">
+                        </ul>
+                    </div>
+                `;
+                categoriesDiv.appendChild(categoryCard);
+
+                const productList = document.getElementById(`${category}-list`);
+
+                products[category].forEach(product => {
+                    const li = document.createElement('li');
+                    li.className = 'list-group-item';
+                    li.innerHTML = `
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>Title:</strong> ${product.title}
+                            </div>
+                            <div>
+                                <button class="btn btn-sm btn-warning edit-button" data-product='${encodeForAttribute(JSON.stringify(product))}'>Edit</button>
+                                <form action="/admin/delete-product/${product.id}" method="POST" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    `;
+                    productList.appendChild(li);
+                });
+            }
+
+            // Attach event listeners to edit buttons
+            const editButtons = document.querySelectorAll('.edit-button');
+            editButtons.forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const product = JSON.parse(event.target.getAttribute('data-product'));
+                    document.getElementById('formTitle').innerText = 'Edit Product';
+                    document.getElementById('formButton').innerText = 'Update Product';
+                    document.getElementById('productForm').action = `/admin/edit-product/${product.id}`;
+
+                    document.getElementById('id').value = product.id;
+                    document.getElementById('title').value = product.title;
+                    document.getElementById('shortTitle').value = product.shortTitle;
+                    document.getElementById('price').value = product.price;
+                    document.getElementById('options').value = product.options;
+                    document.getElementById('tags').value = product.tags;
+                    document.getElementById('deliveryDays').value = product.deliveryDays;
+                    document.getElementById('category').value = product.category;
+                    document.getElementById('description').value = product.description;
+                    document.getElementById('stockStatus').checked = product.inStock;
+                    document.getElementById('sourceUrl').value = product.sourceUrl;
+                    document.getElementById('sourcePrice').value = product.sourcePrice;
+                });
+            });
+        }
+
+        fetchProducts();
+
+        // Preview Description HTML
+        document.getElementById('previewButton').addEventListener('click', () => {
+            const description = document.getElementById('description').value;
+            document.getElementById('previewContent').innerHTML = description;
+            document.getElementById('descriptionPreview').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
